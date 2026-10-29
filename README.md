@@ -1,3 +1,4 @@
+
 # AURA CUTS — Premium Cinematic Video Editor Portfolio
 
 A full-stack, cinematic web portfolio and client acquisition platform engineered for freelance video editors, colorists, and post-production studios.
@@ -92,3 +93,7 @@ A full-stack, cinematic web portfolio and client acquisition platform engineered
 - `npm run build`: Compiles production frontend bundle.
 - `npm run start`: Starts the standalone Express production server on port 3000.
 - `npm run lint`: Verifies TypeScript types with zero errors.
+=======
+# Editor-portfolio
+Video Editing Portfolio | Cinematic Edits, Color Grading &amp; Motion Graphics
+
