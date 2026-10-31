@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ArrowRight, Play, Volume2, Film } from 'lucide-react';
 import type { SiteSettings } from '../types/portfolio.ts';
+import defaultHeroBg from '../assets/images/hero_cinematic_director_1793157693542.jpg';
 
 interface HeroProps {
   settings: SiteSettings;
@@ -42,6 +43,8 @@ export const Hero: React.FC<HeroProps> = ({
     return () => mediaQuery.removeEventListener('change', handler);
   }, []);
 
+  const heroPhotoSrc = settings.heroImageUrl || defaultHeroBg;
+
   const shouldRenderVideo =
     settings.heroBackgroundMode === 'video' &&
     Boolean(settings.heroVideoUrl) &&
@@ -52,12 +55,12 @@ export const Hero: React.FC<HeroProps> = ({
     <div className="relative w-full bg-[#0B0B0D]">
       {/* Viewport Frame */}
       <section className="relative w-full min-h-[90vh] lg:min-h-screen flex flex-col justify-between overflow-hidden pt-28 pb-12">
-        {/* Background Layer: Video Mode with Fallback */}
+        {/* Background Layer: Video Mode or High-Impact Photo */}
         {shouldRenderVideo ? (
           <video
             ref={videoRef}
             src={settings.heroVideoUrl}
-            poster={settings.heroImageUrl}
+            poster={heroPhotoSrc}
             autoPlay
             loop
             muted
@@ -67,12 +70,20 @@ export const Hero: React.FC<HeroProps> = ({
             className="absolute inset-0 w-full h-full object-cover scale-105 filter brightness-70 contrast-110 pointer-events-none"
           />
         ) : (
-          <div
-            className="absolute inset-0 w-full h-full bg-cover bg-center transition-all duration-700 filter brightness-65 pointer-events-none"
-            style={{
-              backgroundImage: `url("${settings.heroImageUrl || '/src/assets/images/hero_cinematic_director_1793157693542.jpg'}")`,
-            }}
-          />
+          <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
+            <img
+              src={heroPhotoSrc}
+              alt={settings.brandName || 'Hero Background'}
+              loading="eager"
+              fetchPriority="high"
+              onError={(e) => {
+                if (e.currentTarget.src !== defaultHeroBg) {
+                  e.currentTarget.src = defaultHeroBg;
+                }
+              }}
+              className="absolute inset-0 w-full h-full object-cover scale-105 filter brightness-65 transition-all duration-700 pointer-events-none"
+            />
+          </div>
         )}
 
         {/* Cinematic Scrims & Vignettes */}
@@ -183,7 +194,7 @@ export const Hero: React.FC<HeroProps> = ({
               850<span className="text-[#FF6A2B]">+</span>
             </div>
             <div className="text-xs font-mono-tag text-[#A5A5AA] mt-1 uppercase tracking-wider">
-              Hours in DaVinci &amp; Premiere
+              Hours in Premiere &amp; After Effects
             </div>
           </div>
 

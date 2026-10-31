@@ -29,7 +29,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
               <img
                 src={
                   about.portraitUrl ||
-                  '/src/assets/images/director_portrait_monochrome_1793157695050.jpg'
+                  'src/assets/images/director_portrait_monochrome_1793157695050.jpg'
                 }
                 alt={about.fullName}
                 className="w-full aspect-[4/5] object-cover filter contrast-105 group-hover:scale-105 transition-transform duration-700"
@@ -128,7 +128,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
               </button>
 
               <div className="text-xs font-mono-tag text-[#A5A5AA]">
-               
+                {about.experienceYears}+ Years Crafting Visual Narratives
               </div>
             </div>
           </div>
@@ -144,11 +144,17 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
               Software Mastery &amp; Systems
             </h3>
             <p className="text-xs text-[#A5A5AA] mt-2">
-              Production-hardened workflow spanning industry-standard NLEs, audio suites, and color science engines.
+              Production-hardened workflow centered on professional Adobe post-production and motion systems.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div
+            className={`grid grid-cols-1 ${
+              about.softwareSkills.length <= 2
+                ? 'md:grid-cols-2 max-w-4xl mx-auto'
+                : 'md:grid-cols-2 lg:grid-cols-3'
+            } gap-6`}
+          >
             {about.softwareSkills.map((skill) => (
               <div
                 key={skill.name}
