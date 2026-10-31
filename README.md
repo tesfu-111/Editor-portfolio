@@ -1,5 +1,5 @@
 
-# AURA CUTS — Premium Cinematic Video Editor Portfolio
+# — Premium Cinematic Video Editor Portfolio
 
 A full-stack, cinematic web portfolio and client acquisition platform engineered for freelance video editors, colorists, and post-production studios.
 
