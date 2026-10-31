@@ -21,7 +21,11 @@ function expressApiPlugin(): Plugin {
 
 export default defineConfig(() => {
   return {
-    base: '/Editor-portfolio/',
+    // GitHub Pages uses a subpath; Vercel uses the domain root.
+    base:
+      process.env.GITHUB_ACTIONS === 'true'
+        ? '/Editor-portfolio/'
+        : '/',
 
     plugins: [react(), tailwindcss(), expressApiPlugin()],
 
